@@ -1,0 +1,8 @@
+version: '3.4'
+
+services:
+  oracle.api:
+    image: ${DOCKER_REGISTRY-}oracle.api
+    build:
+      context: .
+      dockerfile: src/Oracle.API/Dockerfile

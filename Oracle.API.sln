@@ -1,0 +1,39 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Oracle.API", "src/Oracle.API\Oracle.API.csproj", "{29BE4058-AD8B-4705-9434-44EDDBF4202C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Oracle.Core", "src/Oracle.Core\Oracle.Core.csproj", "{142D0595-1166-4628-941A-1D553278C383}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Oracle.Database", "src/Oracle.Database\Oracle.Database.csproj", "{E1CB6827-0C63-420D-B8CB-B9859533C45E}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{BD9639D8-2DAD-40E5-B03C-551FE54A8FE0}"
+	ProjectSection(SolutionItems) = preProject
+		.gitignore = .gitignore
+		global.json = global.json
+		Oracle.API.dcproj = Oracle.API.dcproj
+		docker-compose.yml = docker-compose.yml
+		.dockerignore = .dockerignore
+		docker-compose.override.yml = docker-compose.override.yml
+		README.md = README.md
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{29BE4058-AD8B-4705-9434-44EDDBF4202C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{29BE4058-AD8B-4705-9434-44EDDBF4202C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{29BE4058-AD8B-4705-9434-44EDDBF4202C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{29BE4058-AD8B-4705-9434-44EDDBF4202C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{142D0595-1166-4628-941A-1D553278C383}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{142D0595-1166-4628-941A-1D553278C383}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{142D0595-1166-4628-941A-1D553278C383}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{142D0595-1166-4628-941A-1D553278C383}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E1CB6827-0C63-420D-B8CB-B9859533C45E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E1CB6827-0C63-420D-B8CB-B9859533C45E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E1CB6827-0C63-420D-B8CB-B9859533C45E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E1CB6827-0C63-420D-B8CB-B9859533C45E}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
