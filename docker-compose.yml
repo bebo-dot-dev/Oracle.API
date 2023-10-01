@@ -19,7 +19,7 @@ services:
       oracle-db:
         condition: service_started
     deploy:
-      restart_policy:
+      restart_policy: # Allow Oracle to fully start
         condition: on-failure
         delay: 30s
         max_attempts: 5
@@ -36,6 +36,12 @@ services:
       - APP_USER_PASSWORD=testpassword
     volumes:
       - oracle-volume:/opt/oracle/oradata
+    deploy:
+      restart_policy:
+        condition: on-failure
+        delay: 30s
+        max_attempts: 5
+        window: 60s
         
 volumes:
   oracle-volume:

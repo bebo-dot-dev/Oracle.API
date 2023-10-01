@@ -1,7 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
+using Oracle.Core.Outgoing;
 
 namespace Oracle.Database;
 
@@ -15,7 +15,11 @@ public static class OracleDataDependencyInjectionExtensions
         {
             options.UseOracle(configuration.GetConnectionString("oracle"));
         });
+        
         services.AddScoped<DbContext, OracleDbContext>();
+
+        services.AddScoped<IDepartmentRepository, DepartmentRepository>();
+        
         return services;
     }
 
