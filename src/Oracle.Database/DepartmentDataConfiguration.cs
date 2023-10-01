@@ -4,7 +4,7 @@ using Oracle.Core.Outgoing;
 
 namespace Oracle.Database;
 
-public class DepartmentDataConfiguration : IEntityTypeConfiguration<DepartmentData>
+internal sealed class DepartmentDataConfiguration : IEntityTypeConfiguration<DepartmentData>
 {
     public void Configure(EntityTypeBuilder<DepartmentData> builder)
     {

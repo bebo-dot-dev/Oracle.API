@@ -4,7 +4,7 @@ using Oracle.Core.Outgoing;
 
 namespace Oracle.Database;
 
-public class UserDataConfiguration : IEntityTypeConfiguration<UserData>
+internal sealed class UserDataConfiguration : IEntityTypeConfiguration<UserData>
 {
     public void Configure(EntityTypeBuilder<UserData> builder)
     {
@@ -16,7 +16,7 @@ public class UserDataConfiguration : IEntityTypeConfiguration<UserData>
         builder.Property(u => u.DepartmentId).HasColumnName("departmentId");
         
         builder.HasKey(x => x.UserId);
-        builder.HasIndex(x => x.DepartmentId, name: "ix_user_departmentId");
+        builder.HasIndex(x => x.DepartmentId, name: "IX_user_departmentId");
 
         builder
             .HasOne(u => u.Department)

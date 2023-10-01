@@ -25,7 +25,7 @@ public static class OracleDataDependencyInjectionExtensions
 
     /// <summary>
     /// Applies database migrations at runtime
-    /// Good enough for this demo application, this approach is inappropriate for managing production databases
+    /// Good enough for this demo application, this approach is inappropriate for managing production databases.
     /// See https://learn.microsoft.com/en-us/ef/core/managing-schemas/migrations/applying?tabs=dotnet-core-cli#apply-migrations-at-runtime
     /// </summary>
     /// <param name="serviceProvider">The <see cref="IServiceProvider"/></param>
