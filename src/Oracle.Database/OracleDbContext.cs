@@ -14,7 +14,7 @@ internal sealed class OracleDbContext : DbContext
     }
     
     public DbSet<DepartmentData> Departments { get; set; } = null!;
-    public DbSet<UserData> Users { get; set; } = null!;
+    public DbSet<EmployeeData> Employees { get; set; } = null!;
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {

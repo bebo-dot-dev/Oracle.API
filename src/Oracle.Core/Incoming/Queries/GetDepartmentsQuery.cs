@@ -17,10 +17,10 @@ public sealed class GetDepartmentsQueryHandler : IRequestHandler<GetDepartmentsQ
     public async ValueTask<DepartmentsResponse> Handle(
         GetDepartmentsQuery request, CancellationToken cancellationToken)
     {
-        var departmentsData = await _repository.GetDepartmentsAsync(cancellationToken);
+        var data = await _repository.GetDepartmentsAsync(cancellationToken);
         return new DepartmentsResponse
         {
-            Departments = departmentsData.ToDepartments()
+            Departments = data.ToDepartments()
         };
     }
 }

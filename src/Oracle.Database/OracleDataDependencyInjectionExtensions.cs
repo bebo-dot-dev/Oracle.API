@@ -19,6 +19,7 @@ public static class OracleDataDependencyInjectionExtensions
         services.AddScoped<DbContext, OracleDbContext>();
 
         services.AddScoped<IDepartmentRepository, DepartmentRepository>();
+        services.AddScoped<IEmployeeRepository, EmployeeRepository>();
         
         return services;
     }

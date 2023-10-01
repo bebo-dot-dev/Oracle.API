@@ -6,5 +6,5 @@ public class DepartmentData
 
     public string Name { get; set; } = null!;
 
-    public List<UserData> Users { get; set; } = new();
+    public List<EmployeeData> Employees { get; set; } = new();
 }

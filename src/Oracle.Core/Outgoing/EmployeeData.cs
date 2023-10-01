@@ -1,8 +1,8 @@
 namespace Oracle.Core.Outgoing;
 
-public class UserData
+public class EmployeeData
 {
-    public int UserId { get; set; }
+    public int EmployeeId { get; set; }
 
     public string UserName { get; set; } = null!;
 

@@ -37,13 +37,13 @@ public class DepartmentV1Controller : ControllerBase
     /// <returns><see cref="Department"/></returns>
     [HttpGet("department/{departmentId:int}")]
     [ProducesResponseType(typeof(Department), StatusCodes.Status200OK)]
-    [ProducesResponseType(StatusCodes.Status204NoContent)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
     [ProducesResponseType(StatusCodes.Status500InternalServerError)]
     public async Task<IActionResult> Department([FromRoute]int departmentId)
     {
         var request = new GetDepartmentQuery(departmentId);
         var department = await _mediator.Send(request);
-        return Ok(department);
+        return department is not null ? Ok(department) : NotFound();
     }
 
     /// <summary>

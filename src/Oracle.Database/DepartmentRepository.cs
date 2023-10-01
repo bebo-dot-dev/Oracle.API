@@ -3,7 +3,7 @@ using Oracle.Core.Outgoing;
 
 namespace Oracle.Database;
 
-internal class DepartmentRepository : IDepartmentRepository
+internal sealed class DepartmentRepository : IDepartmentRepository
 {
     private readonly OracleDbContext _context;
 
@@ -16,7 +16,7 @@ internal class DepartmentRepository : IDepartmentRepository
         CancellationToken cancellationToken)
     {
         return await _context.Departments
-            .Include(d => d.Users)
+            .Include(d => d.Employees)
             .ToListAsync(cancellationToken);
     }
 

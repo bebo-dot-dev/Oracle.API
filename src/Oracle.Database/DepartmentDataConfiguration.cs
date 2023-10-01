@@ -14,7 +14,7 @@ internal sealed class DepartmentDataConfiguration : IEntityTypeConfiguration<Dep
         builder.HasKey(d => d.DepartmentId);
 
         builder
-            .HasMany(d => d.Users)
+            .HasMany(d => d.Employees)
             .WithOne(u => u.Department);
         
         builder.ToTable("department");
