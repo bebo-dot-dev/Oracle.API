@@ -4,11 +4,6 @@
       <settings>
         <option name="envFilePath" value="" />
         <option name="removeOrphansOnComposeDown" value="false" />
-        <option name="secondarySourceFiles">
-          <list>
-            <option value="docker-compose.override.yml" />
-          </list>
-        </option>
         <option name="services">
           <list>
             <option value="oracle.api" />

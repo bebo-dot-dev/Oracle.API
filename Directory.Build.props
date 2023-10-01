@@ -1,0 +1,14 @@
+<Project>
+    <PropertyGroup>
+        <Title>Oracle API</Title>
+        <Description>Sample API with Oracle EF Core</Description>
+        <RepositoryType>git</RepositoryType>
+        <RepositoryUrl>https://github.com/bebo-dot-dev/Oracle.API</RepositoryUrl>
+        <TargetFramework>net6.0</TargetFramework>
+        <LangVersion>10</LangVersion>
+    </PropertyGroup>
+
+    <PropertyGroup>
+        <RestorePackagesWithLockFile>true</RestorePackagesWithLockFile>
+    </PropertyGroup>
+</Project>

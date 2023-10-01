@@ -6,3 +6,36 @@ services:
     build:
       context: .
       dockerfile: src/Oracle.API/Dockerfile
+    ports:
+      - "5077:5077"
+      - "7143:7143"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=https://+:7143;http://+:5077
+      - ASPNETCORE_Kestrel__Certificates__Default__Path=/https/localhost.pfx
+    volumes:
+      - ./:/https:ro
+    depends_on: 
+      oracle-db:
+        condition: service_started
+    deploy:
+      restart_policy:
+        condition: on-failure
+        delay: 30s
+        max_attempts: 5
+        window: 60s
+  
+  oracle-db:
+    image: "gvenzl/oracle-xe"
+    ports:
+      - "1521:1521"
+    environment:
+      - ORACLE_PASSWORD=testpassword
+      - ORACLE_DATABASE=APIDB
+      - APP_USER=testuser
+      - APP_USER_PASSWORD=testpassword
+    volumes:
+      - oracle-volume:/opt/oracle/oradata
+        
+volumes:
+  oracle-volume:
