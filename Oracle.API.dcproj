@@ -9,9 +9,6 @@
         <DockerServiceName>oracle.api</DockerServiceName>
     </PropertyGroup>
     <ItemGroup>
-        <None Include="src/docker-compose.override.yml">
-            <DependentUpon>src/docker-compose.yml</DependentUpon>
-        </None>
         <None Include="src/docker-compose.yml" />
         <None Include=".dockerignore" />
     </ItemGroup>

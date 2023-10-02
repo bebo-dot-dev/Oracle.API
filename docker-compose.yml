@@ -1,5 +1,11 @@
 version: '3.4'
 
+x-service-restart-policy: &service-restart-policy
+  restart_policy:
+    condition: on-failure
+    delay: 60s
+    window: 100s
+
 services:
   oracle.api:
     image: ${DOCKER_REGISTRY-}oracle.api
@@ -19,12 +25,8 @@ services:
       oracle-db:
         condition: service_started
     deploy:
-      restart_policy: # Allow Oracle to fully start
-        condition: on-failure
-        delay: 30s
-        max_attempts: 5
-        window: 60s
-  
+      <<: *service-restart-policy # Allow Oracle to fully start
+        
   oracle-db:
     image: "gvenzl/oracle-xe"
     ports:
@@ -37,11 +39,7 @@ services:
     volumes:
       - oracle-volume:/opt/oracle/oradata
     deploy:
-      restart_policy:
-        condition: on-failure
-        delay: 30s
-        max_attempts: 5
-        window: 60s
+      <<: *service-restart-policy
         
 volumes:
   oracle-volume:
