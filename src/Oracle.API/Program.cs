@@ -31,8 +31,6 @@ try
 catch (Exception e)
 {
     logger.LogError(e, "EF Core Oracle database migrations failure");
-    Environment.ExitCode = -1;
-    return;
 }
 
 app.Run();

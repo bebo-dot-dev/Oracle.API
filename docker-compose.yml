@@ -23,9 +23,10 @@ services:
       - ./:/https:ro
     depends_on: 
       oracle-db:
-        condition: service_started
+        condition: service_healthy
+        restart: true
     deploy:
-      <<: *service-restart-policy # Allow Oracle to fully start
+      <<: *service-restart-policy
         
   oracle-db:
     image: "gvenzl/oracle-xe"
@@ -40,6 +41,13 @@ services:
       - oracle-volume:/opt/oracle/oradata
     deploy:
       <<: *service-restart-policy
-        
+    healthcheck:
+      test: [ "CMD-SHELL", "healthcheck.sh" ]
+      interval: 10s
+      timeout: 10s
+      retries: 60
+      start_period: 0s
+      start_interval: 5s
+            
 volumes:
   oracle-volume:
