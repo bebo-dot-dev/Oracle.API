@@ -2,5 +2,5 @@ namespace Oracle.Core;
 
 public sealed record EmployeesResponse
 {
-    public List<Employee> Users { get; init; } = new();
+    public List<Employee> Employees { get; init; } = new();
 }

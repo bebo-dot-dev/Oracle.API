@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 using Oracle.Core.Outgoing;
 
 namespace Oracle.Database;
@@ -37,6 +38,16 @@ public static class OracleDataDependencyInjectionExtensions
     {
         var options = new DbContextOptions<OracleDbContext>();
         using var dbContext = new OracleDbContext(options, configuration);
-        dbContext.Database.Migrate();
+        
+        var logger = serviceProvider.GetRequiredService<ILogger<OracleDbContext>>();
+        try
+        {
+            dbContext.Database.Migrate();
+            logger.LogInformation("EF Core Oracle database migrations ran successfully");
+        }
+        catch (Exception e)
+        {
+            logger.LogError(e, "EF Core Oracle database migrations failure");
+        }
     }
 }

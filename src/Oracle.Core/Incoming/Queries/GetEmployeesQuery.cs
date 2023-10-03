@@ -20,7 +20,7 @@ public sealed class GetUsersQueryHandler : IRequestHandler<GetEmployeesQuery, Em
         var data = await _repository.GetEmployeesAsync(cancellationToken);
         return new EmployeesResponse
         {
-            Users = data.ToEmployees()
+            Employees = data.ToEmployees()
         };
     }
 }
