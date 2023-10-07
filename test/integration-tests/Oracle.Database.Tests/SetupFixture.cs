@@ -15,10 +15,10 @@ using Testcontainers.Oracle;
 [SetUpFixture]
 internal class SetupFixture
 {
-    private static OracleContainer _oracleTestContainer = null!;
-    private static IConfiguration _configuration = null!;
+    private static OracleContainer _oracleTestContainer;
+    private static IConfiguration _configuration;
 
-    public static OracleDbContext DbContext = null!;
+    public static OracleDbContext DbContext;
 
     [OneTimeSetUp]
     public static async Task OneTimeSetup()
@@ -36,7 +36,7 @@ internal class SetupFixture
     {
         _configuration = new ConfigurationBuilder()
             .AddInMemoryCollection(
-                new List<KeyValuePair<string, string?>>
+                new List<KeyValuePair<string, string>>
                 {
                     new("ConnectionStrings:oracle", connectionString)
                 })
