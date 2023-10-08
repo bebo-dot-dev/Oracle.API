@@ -25,3 +25,7 @@ app.MapControllers();
 app.Services.MigrateDatabase(builder.Configuration);
 
 app.Run();
+
+#pragma warning disable CA1050
+public partial class Program { } //WebApplicationFactory support
+#pragma warning restore CA1050

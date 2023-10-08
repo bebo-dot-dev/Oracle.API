@@ -24,7 +24,6 @@ public class EmployeeRepositoryTests : TestBase
     public async Task InsertEmployeeAsync_WhenEmployeeInserted_AssertEmployeeInDatabase()
     {
         //arrange
-        var userName = Guid.NewGuid().ToString();
         var department = await DatabaseHelper.InsertDepartmentAsync(
             new DepartmentData
             {
@@ -36,7 +35,7 @@ public class EmployeeRepositoryTests : TestBase
         var act = await _sut.InsertEmployeeAsync(
             new EmployeeData
             {
-                UserName = userName,
+                UserName = Guid.NewGuid().ToString(),
                 Password = "testPassword",
                 FirstName = "testFirstName",
                 LastName = "testLastName",
@@ -48,21 +47,20 @@ public class EmployeeRepositoryTests : TestBase
         var allEmployees = await DatabaseHelper.GetEmployeesAsync(_cts.Token);
         allEmployees.Count.Should().Be(1);
         allEmployees.Single().EmployeeId.Should().Be(act.EmployeeId);
-        allEmployees.Single().UserName.Should().Be(userName);
+        allEmployees.Single().UserName.Should().Be(act.UserName);
     }
 
     [Test]
     public async Task DeleteEmployeeAsync_WhenEmployeeDeleted_AssertEmployeeNotInDatabase()
     {
         //arrange
-        var userName = Guid.NewGuid().ToString();
         var department = await DatabaseHelper.InsertDepartmentAsync(
             new DepartmentData { Name = Guid.NewGuid().ToString() },
             _cts.Token);
         var employee = await DatabaseHelper.InsertEmployeeAsync(
             new EmployeeData
             {
-                UserName = userName,
+                UserName = Guid.NewGuid().ToString(),
                 Password = "testPassword",
                 FirstName = "testFirstName",
                 LastName = "testLastName",
@@ -71,7 +69,7 @@ public class EmployeeRepositoryTests : TestBase
             _cts.Token);
         var allEmployees = await DatabaseHelper.GetEmployeesAsync(_cts.Token);
         allEmployees.Count.Should().Be(1);
-        allEmployees.Single().UserName.Should().Be(userName);
+        allEmployees.Single().UserName.Should().Be(employee.UserName);
 
         //act
         var act = await _sut.DeleteEmployeeAsync(
@@ -88,15 +86,13 @@ public class EmployeeRepositoryTests : TestBase
     public async Task GetEmployeesAsync_WhenEmployeeInserted_AssertOneEmployeeReturnedWithDepartment()
     {
         //arrange
-        var departmentName = Guid.NewGuid().ToString();
-        var userName = Guid.NewGuid().ToString();
         var department = await DatabaseHelper.InsertDepartmentAsync(
-            new DepartmentData { Name = departmentName },
+            new DepartmentData { Name = Guid.NewGuid().ToString() },
             _cts.Token);
         var employee = await DatabaseHelper.InsertEmployeeAsync(
             new EmployeeData
             {
-                UserName = userName,
+                UserName = Guid.NewGuid().ToString(),
                 Password = "testPassword",
                 FirstName = "testFirstName",
                 LastName = "testLastName",
@@ -110,24 +106,22 @@ public class EmployeeRepositoryTests : TestBase
         //assert
         act.Count.Should().Be(1);
         act.Single().EmployeeId.Should().Be(employee.EmployeeId);
-        act.Single().UserName.Should().Be(userName);
+        act.Single().UserName.Should().Be(employee.UserName);
         act.Single().Department.Should().NotBeNull();
-        act.Single().Department.Name.Should().Be(departmentName);
+        act.Single().Department.Name.Should().Be(department.Name);
     }
 
     [Test]
     public async Task GetEmployeeAsync_WhenEmployee_AssertEmployeeReturnedWithDepartment()
     {
         //arrange
-        var departmentName = Guid.NewGuid().ToString();
-        var userName = Guid.NewGuid().ToString();
         var department = await DatabaseHelper.InsertDepartmentAsync(
-            new DepartmentData { Name = departmentName },
+            new DepartmentData { Name = Guid.NewGuid().ToString() },
             _cts.Token);
         var employee = await DatabaseHelper.InsertEmployeeAsync(
             new EmployeeData
             {
-                UserName = userName,
+                UserName = Guid.NewGuid().ToString(),
                 Password = "testPassword",
                 FirstName = "testFirstName",
                 LastName = "testLastName",
@@ -141,8 +135,8 @@ public class EmployeeRepositoryTests : TestBase
         //assert
         act.Should().NotBeNull();
         act!.EmployeeId.Should().Be(employee.EmployeeId);
-        act.UserName.Should().Be(userName);
-        act.Department.Name.Should().Be(departmentName);
+        act.UserName.Should().Be(employee.UserName);
+        act.Department.Name.Should().Be(department.Name);
     }
 
     [Test]

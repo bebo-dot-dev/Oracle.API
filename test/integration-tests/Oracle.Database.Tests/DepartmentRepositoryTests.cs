@@ -39,19 +39,16 @@ public class DepartmentRepositoryTests : TestBase
     }
 
     [Test]
-    public async Task
-        DeleteDepartmentAsync_WhenDepartmentDeleted_AssertDepartmentNotInDatabaseAndEmployeeDeleteCascades()
+    public async Task DeleteDepartmentAsync_WhenDepartmentDeleted_AssertDepartmentNotInDatabaseAndEmployeeDeleteCascades()
     {
         //arrange
-        var departmentName = Guid.NewGuid().ToString();
-        var userName = Guid.NewGuid().ToString();
         var department = await DatabaseHelper.InsertDepartmentAsync(
-            new DepartmentData { Name = departmentName },
+            new DepartmentData { Name = Guid.NewGuid().ToString() },
             _cts.Token);
         var employee = await DatabaseHelper.InsertEmployeeAsync(
             new EmployeeData
             {
-                UserName = userName,
+                UserName = Guid.NewGuid().ToString(),
                 Password = "testPassword",
                 FirstName = "testFirstName",
                 LastName = "testLastName",
@@ -62,7 +59,7 @@ public class DepartmentRepositoryTests : TestBase
         allDepartments.Count.Should().Be(1);
         allDepartments.Single().DepartmentId.Should().Be(department.DepartmentId);
         allDepartments.Single().Employees.Count.Should().Be(1);
-        allDepartments.Single().Employees.Single().UserName.Should().Be(userName);
+        allDepartments.Single().Employees.Single().UserName.Should().Be(employee.UserName);
 
         //act
         var act = await _sut.DeleteDepartmentAsync(
@@ -81,15 +78,13 @@ public class DepartmentRepositoryTests : TestBase
     public async Task GetDepartmentsAsync_WhenDepartmentInsertedWithEmployee_AssertOneDepartmentReturnedWithEmployee()
     {
         //arrange
-        var departmentName = Guid.NewGuid().ToString();
-        var userName = Guid.NewGuid().ToString();
         var department = await DatabaseHelper.InsertDepartmentAsync(
-            new DepartmentData { Name = departmentName },
+            new DepartmentData { Name = Guid.NewGuid().ToString() },
             _cts.Token);
         var employee = await DatabaseHelper.InsertEmployeeAsync(
             new EmployeeData
             {
-                UserName = userName,
+                UserName = Guid.NewGuid().ToString(),
                 Password = "testPassword",
                 FirstName = "testFirstName",
                 LastName = "testLastName",
@@ -103,25 +98,23 @@ public class DepartmentRepositoryTests : TestBase
         //assert
         act.Count.Should().Be(1);
         act.Single().DepartmentId.Should().Be(department.DepartmentId);
-        act.Single().Name.Should().Be(departmentName);
+        act.Single().Name.Should().Be(department.Name);
         act.Single().Employees.Count.Should().Be(1);
         act.Single().Employees.Single().EmployeeId.Should().Be(employee.EmployeeId);
-        act.Single().Employees.Single().UserName.Should().Be(userName);
+        act.Single().Employees.Single().UserName.Should().Be(employee.UserName);
     }
 
     [Test]
     public async Task GetDepartmentAsync_WhenDepartmentInsertedWithEmployee_AssertDepartmentReturnedWithEmployee()
     {
         //arrange
-        var departmentName = Guid.NewGuid().ToString();
-        var userName = Guid.NewGuid().ToString();
         var department = await DatabaseHelper.InsertDepartmentAsync(
-            new DepartmentData { Name = departmentName },
+            new DepartmentData { Name = Guid.NewGuid().ToString() },
             _cts.Token);
         var employee = await DatabaseHelper.InsertEmployeeAsync(
             new EmployeeData
             {
-                UserName = userName,
+                UserName = Guid.NewGuid().ToString(),
                 Password = "testPassword",
                 FirstName = "testFirstName",
                 LastName = "testLastName",
@@ -135,10 +128,10 @@ public class DepartmentRepositoryTests : TestBase
         //assert
         act.Should().NotBeNull();
         act!.DepartmentId.Should().Be(department.DepartmentId);
-        act.Name.Should().Be(departmentName);
+        act.Name.Should().Be(department.Name);
         act.Employees.Count.Should().Be(1);
         act.Employees.Single().EmployeeId.Should().Be(employee.EmployeeId);
-        act.Employees.Single().UserName.Should().Be(userName);
+        act.Employees.Single().UserName.Should().Be(employee.UserName);
     }
 
     [Test]

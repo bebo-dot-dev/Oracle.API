@@ -1,5 +1,7 @@
 using System.Collections.Generic;
+using System.Net.Http;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using NUnit.Framework;
@@ -14,9 +16,10 @@ using Testcontainers.Oracle;
 [SetUpFixture]
 internal class SetupFixture
 {
+    private static WebApplicationFactory<Program> _application;
     private static OracleContainer _oracleTestContainer;
-    private static IConfiguration _configuration;
 
+    public static HttpClient Client;
     public static OracleDbContext DbContext;
 
     [OneTimeSetUp]
@@ -28,22 +31,27 @@ internal class SetupFixture
 
         await _oracleTestContainer.StartAsync();
 
-        CreateDatabaseContext(_oracleTestContainer.GetConnectionString());
+        var connectionString = _oracleTestContainer.GetConnectionString();
+        _application = new WebApplicationFactory<Program>()
+            .WithWebHostBuilder(
+                b => { b.UseSetting("ConnectionStrings:oracle", connectionString); });
+
+        Client = _application.CreateClient();
+        CreateDatabaseContext(connectionString);
     }
 
     private static void CreateDatabaseContext(string connectionString)
     {
-        _configuration = new ConfigurationBuilder()
+        var configuration = new ConfigurationBuilder()
             .AddInMemoryCollection(
                 new List<KeyValuePair<string, string>>
                 {
                     new("ConnectionStrings:oracle", connectionString)
-                })
+                }!)
             .Build();
 
         var options = new DbContextOptions<OracleDbContext>();
-        DbContext = new OracleDbContext(options, _configuration);
-        DbContext.Database.Migrate();
+        DbContext = new OracleDbContext(options, configuration);
     }
 
     public static async Task ClearDownDatabase()
@@ -55,10 +63,8 @@ internal class SetupFixture
     [OneTimeTearDown]
     public static async Task OneTimeTearDown()
     {
-        await DbContext.Database.CloseConnectionAsync();
-        await DbContext.DisposeAsync();
-
         await _oracleTestContainer.StopAsync();
         await _oracleTestContainer.DisposeAsync();
+        await _application.DisposeAsync();
     }
 }
