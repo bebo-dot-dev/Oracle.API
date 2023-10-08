@@ -31,7 +31,7 @@ jobs:
       with:
         reports: "**/TestResults/**/coverage.cobertura.xml"
         targetdir: "test/coveragereport"
-        reporttypes: "Html;Html_Dark;HtmlInline;Cobertura"
+        reporttypes: "MarkdownSummaryGithub"
         classfilters: "-Oracle.Database.Migrations*"
         filefilters: "-*.g.cs"
         assemblyfilters: "-**.Tests"
@@ -42,4 +42,4 @@ jobs:
         path: "test/coveragereport"
     - name: Commit coverage report
       shell: bash
-      run: git config --global user.email "joe@bebo.dev" && git config --global user.name "Joe" && git fetch --all && git add -A && git commit -m "latest coverage report" && git pull --rebase && git push --force
+      run: git config --global user.email "joe@bebo.dev" && git config --global user.name "Joe" && git fetch --all && git add test/coveragereport/SummaryGithub.md && git commit -m "latest coverage report" && git pull --rebase && git push --force
