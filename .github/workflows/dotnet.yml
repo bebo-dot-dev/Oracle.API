@@ -22,4 +22,13 @@ jobs:
     - name: Build
       run: dotnet build --no-restore
     - name: Test
-      run: dotnet test --no-build --verbosity normal
+      run: dotnet test --no-build --verbosity normal --collect:"XPlat Code Coverage"
+    - name: ReportGenerator
+      uses: danielpalme/ReportGenerator-GitHub-Action@5.1.26
+      with:
+        reports: "**/TestResults/**/coverage.cobertura.xml"
+        targetdir: "coveragereport"
+        reporttypes: Html;Html_Dark
+        classfilters: "-Oracle.Database.Migrations*"
+        filefilters: "-*.g.cs"
+        assemblyfilters: "-**.Tests"

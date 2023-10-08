@@ -1,3 +1,4 @@
+using System.Diagnostics.CodeAnalysis;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -6,6 +7,7 @@ using Oracle.Core.Outgoing;
 
 namespace Oracle.Database;
 
+[ExcludeFromCodeCoverage]
 public static class OracleDataDependencyInjectionExtensions
 {
     public static IServiceCollection RegisterOracleDatabaseServices(

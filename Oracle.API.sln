@@ -28,6 +28,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Oracle.Core.Tests", "test\u
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Oracle.API.Tests", "test\component-tests\Oracle.API.Tests\Oracle.API.Tests.csproj", "{A4DC532C-13A7-435C-9315-3F64621DDFC1}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "devops", "devops", "{8C9464FC-645A-4CFE-9BF7-6C5290D14D26}"
+	ProjectSection(SolutionItems) = preProject
+		.github\workflows\dotnet.yml = .github\workflows\dotnet.yml
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -66,5 +71,6 @@ Global
 		{8D8DD82F-4E8C-4FE2-9FCC-37769A0A0862} = {550FB7F7-1090-4A4B-948E-BA0C2867EA2E}
 		{796E471A-7C18-4A48-A0CE-EFDF33F9BAD9} = {5E59A3D0-4BAA-461E-8D82-9DF7165CEB51}
 		{A4DC532C-13A7-435C-9315-3F64621DDFC1} = {BFE99407-EEB0-46CB-BA39-BC7444C0A28F}
+		{8C9464FC-645A-4CFE-9BF7-6C5290D14D26} = {BD9639D8-2DAD-40E5-B03C-551FE54A8FE0}
 	EndGlobalSection
 EndGlobal
