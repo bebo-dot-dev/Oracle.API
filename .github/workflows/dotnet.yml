@@ -41,4 +41,4 @@ jobs:
         path: "test/coveragereport"
     - name: Commit coverage report
       shell: bash
-      run: git config --global user.email "joe@bebo.dev" && git config --global user.name "Joe" && git fetch --all && git add -A && git commit -m "coverage report" && git pull --rebase && git push --force
+      run: git config --global user.email "joe@bebo.dev" && git config --global user.name "Joe" && git fetch --all && git add -A && git commit -m "latest coverage report" && git pull --rebase && git push --force
