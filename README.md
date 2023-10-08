@@ -1,6 +1,8 @@
 ## Oracle.API
 A .NET6 Web API that talks to an Oracle database with EF Core.
 
+[![build-and-test](https://github.com/bebo-dot-dev/Oracle.API/actions/workflows/dotnet.yml/badge.svg)](https://github.com/bebo-dot-dev/Oracle.API/actions/workflows/dotnet.yml)
+
 ### Nuget packages used
 ```
 <PackageReference Include="Mediator.SourceGenerator" Version="2.1.7" />
