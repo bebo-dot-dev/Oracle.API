@@ -3,6 +3,8 @@ name: build-and-test
 on:
   push:
     branches: [ "main" ]
+    paths-ignore:
+      - 'test/coveragereport/**'
   pull_request:
     branches: [ "main" ]
 
@@ -27,7 +29,7 @@ jobs:
       uses: danielpalme/ReportGenerator-GitHub-Action@5.1.26
       with:
         reports: "**/TestResults/**/coverage.cobertura.xml"
-        targetdir: "coveragereport"
+        targetdir: "test/coveragereport"
         reporttypes: "Html;Html_Dark;HtmlInline;Cobertura"
         classfilters: "-Oracle.Database.Migrations*"
         filefilters: "-*.g.cs"
@@ -36,4 +38,7 @@ jobs:
       uses: actions/upload-artifact@v2.2.3
       with:
         name: CoverageReport        
-        path: "coveragereport"
+        path: "test/coveragereport"
+    - name: Commit coverage report
+      shell: bash
+      run: git config --global user.email "joe@bebo.dev" && git config --global user.name "Joe" && git fetch --all && git add -A && git commit -m "coverage report" && git pull --rebase && git push --force
